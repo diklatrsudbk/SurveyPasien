@@ -244,30 +244,35 @@
           </div>
 
           <!-- Ruangan / Unit Pelayanan -->
-          <div class="space-y-2 md:col-span-2">
-            <label class="block text-sm font-semibold text-slate-700">Nama Ruangan / Unit Pelayanan <span class="text-red-500">*</span></label>
-            <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                <i class="fa-solid fa-door-open"></i>
-              </span>
-              <select required x-model="formData.ruangan" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-kiwari-500 focus:ring-2 focus:ring-kiwari-100 transition focus:outline-none text-sm bg-white appearance-none">
-                <option value="" disabled selected>Pilih Ruangan Pelayanan / Poliklinik...</option>
-                <option value="IGD (Instalasi Gawat Darurat)">IGD (Instalasi Gawat Darurat)</option>
-                <option value="Poliklinik Kebidanan & Kandungan">Poliklinik Kebidanan & Kandungan</option>
-                <option value="Poliklinik Anak">Poliklinik Anak</option>
-                <option value="Poliklinik Penyakit Dalam">Poliklinik Penyakit Dalam</option>
-                <option value="Poliklinik Bedah">Poliklinik Bedah</option>
-                <option value="Ruang Rawat Inap Anak">Ruang Rawat Inap Anak</option>
-                <option value="Ruang Rawat Inap Dewasa">Ruang Rawat Inap Dewasa</option>
-                <option value="Ruang Bersalin (VK)">Ruang Bersalin (VK)</option>
-                <option value="ICU / NICU / PICU">ICU / NICU / PICU</option>
-                <option value="Lainnya">Lainnya...</option>
-              </select>
-              <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 pointer-events-none">
-                <i class="fa-solid fa-chevron-down text-xs"></i>
-              </span>
-            </div>
-          </div>
+<div class="space-y-2 md:col-span-2">
+  <label class="block text-sm font-semibold text-slate-700">
+    Nama Ruangan / Unit Pelayanan <span class="text-red-500">*</span>
+  </label>
+  
+  <div class="relative">
+    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+      <i class="fa-solid fa-door-open"></i>
+    </span>
+    
+    <select 
+      required 
+      x-model="formData.ruangan" 
+      class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-kiwari-500 focus:ring-2 focus:ring-kiwari-100 transition focus:outline-none text-sm bg-white appearance-none"
+    >
+      <option value="" disabled>-- Pilih Ruangan Pelayanan --</option>
+      
+      <!-- Alpine.js Looping Array Ruangan -->
+      <template x-for="ruang in daftarRuangan" :key="ruang">
+        <option :value="ruang" x-text="ruang"></option>
+      </template>
+      
+    </select>
+    
+    <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 pointer-events-none">
+      <i class="fa-solid fa-chevron-down text-xs"></i>
+    </span>
+  </div>
+</div>
 
           <!-- Alamat / Domisili -->
           <div class="space-y-2 md:col-span-2">
@@ -649,6 +654,24 @@
           fotoBase64: '',
           fotoName: ''
         },
+
+      daftarRuangan: [
+        'IGD (Instalasi Gawat Darurat)',
+        'Instalasi Kencanasari (Poliklinik Lt.2)',
+        'Unit Dialisis (Lt.3)',
+        'Neonatus Intensive Care Unit (NICU Lt.4)',
+        'Pediatrick Intensive Care Unit (PICU Lt.4)',
+        'Instalasi Bedah Sentral (OK Lt.5)',
+        'Instalasi Purbasora (VK-IGD Ponek Lt.7)',
+        'Rawat Inap Bunisora (Perinatologi Level. 1&2 Lt.7)',
+        'Rawat Inap Jayaningrat (Ranap IPD Lt.8)',
+        'Rawat Inap Mayangsari (Ranap Anak Lt.9)',
+        'Rawat Inap Rara Santang (Ranap Nifas Lt.10)',
+        'Rawat Inap Bedah (Ranap Bedah Lt.11)',
+        'Instalasi Salakanagara (LAB Lt.1)',
+        'Instalasi Surawisesa (LAB Lt.2)',
+        'Instalasi Manikmaya (Rehab Medik Lt.3)',
+      ],
 
         imagePreview: null,
         originalFileName: '',
