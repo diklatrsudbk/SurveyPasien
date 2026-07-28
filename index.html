@@ -445,35 +445,84 @@
             </div>
           </div>
 
-          <!-- Dokumentasi Kegiatan / Upload Foto -->
-          <div class="space-y-2">
+          <div x-data="{ showModal: false }" class="space-y-2">
   <label class="block text-sm font-semibold text-slate-700">
     Dokumentasi Kegiatan / Upload Foto <span class="text-red-500">*</span>
   </label>
   <p class="text-xs text-slate-400 mb-2">
-    Unggah file foto dokumentasi atau bukti pelayanan. Berkas akan otomatis disimpan dengan nama Anda dan Tanggal saat ini (Format: JPG, PNG, Max 5MB).
+    Unggah foto bukti pelayanan (JPG, PNG, Max 5MB).
   </p>
-  
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <!-- File Drag Drop Zone -->
-    <div 
-      class="border-2 border-dashed border-slate-200 hover:border-kiwari-500 rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer bg-slate-50 hover:bg-kiwari-50/20 transition-all relative" 
-      @click="$refs.fileInput.click()"
-    >
-      <!-- capture="environment" telah dihapus di sini -->
-      <input 
-        type="file" 
-        x-ref="fileInput" 
-        @change="handleFileUpload($event)" 
-        accept="image/*" 
-        class="hidden"
-      >
+
+  <!-- Hidden Inputs (Satu untuk Kamera, Satu untuk Galeri) -->
+  <input 
+    type="file" 
+    x-ref="cameraInput" 
+    @change="handleFileUpload($event); showModal = false" 
+    accept="image/*" 
+    capture="environment" 
+    class="hidden"
+  >
+  <input 
+    type="file" 
+    x-ref="galleryInput" 
+    @change="handleFileUpload($event); showModal = false" 
+    accept="image/*" 
+    class="hidden"
+  >
+
+  <!-- 1 Tombol Utama -->
+  <div 
+    @click="showModal = true"
+    class="border-2 border-dashed border-slate-200 hover:border-kiwari-500 rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer bg-slate-50 hover:bg-kiwari-50/20 transition-all"
+  >
+    <div class="w-12 h-12 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center text-kiwari-600 mb-3">
+      <i class="fa-solid fa-camera text-xl"></i>
+    </div>
+    <p class="text-sm font-semibold text-slate-700 text-center">Unggah / Ambil Foto Dokumentasi</p>
+    <p class="text-[10px] text-slate-400 mt-1 text-center">Klik untuk memilih metode pengunggahan</p>
+  </div>
+
+  <!-- Modal / Dialog Pilihan -->
+  <div 
+    x-show="showModal" 
+    x-transition.opacity 
+    class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-900/50 p-4"
+    @click.self="showModal = false"
+    style="display: none;"
+  >
+    <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl space-y-4 text-center">
+      <h3 class="text-base font-semibold text-slate-800">Pilih Sumber Foto</h3>
+      <p class="text-xs text-slate-500">Pilih bagaimana Anda ingin mengunggah foto</p>
       
-      <div class="w-12 h-12 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center text-kiwari-600 mb-3">
-        <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
+      <div class="grid grid-cols-2 gap-3 pt-2">
+        <!-- Opsi 1: Kamera -->
+        <button 
+          type="button" 
+          @click="$refs.cameraInput.click()" 
+          class="flex flex-col items-center justify-center p-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all text-slate-700"
+        >
+          <i class="fa-solid fa-camera text-2xl text-kiwari-600 mb-2"></i>
+          <span class="text-xs font-semibold">Kamera</span>
+        </button>
+
+        <!-- Opsi 2: Galeri -->
+        <button 
+          type="button" 
+          @click="$refs.galleryInput.click()" 
+          class="flex flex-col items-center justify-center p-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all text-slate-700"
+        >
+          <i class="fa-solid fa-images text-2xl text-kiwari-600 mb-2"></i>
+          <span class="text-xs font-semibold">Galeri</span>
+        </button>
       </div>
-      <p class="text-sm font-semibold text-slate-700 text-center">Klik atau Tarik Foto ke Sini</p>
-      <p class="text-[10px] text-slate-400 mt-1 text-center">JPG, PNG, JPEG up to 5MB</p>
+
+      <button 
+        type="button" 
+        @click="showModal = false" 
+        class="w-full py-2 text-xs font-medium text-slate-400 hover:text-slate-600 transition-colors"
+      >
+        Batal
+      </button>
     </div>
   </div>
 </div>
