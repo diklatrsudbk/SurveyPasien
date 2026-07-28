@@ -72,7 +72,7 @@
           <img src="img/rsudbk.png" alt="Logo RSUDBK" class="w-full h-full object-contain p-1" onerror="this.onerror=null; this.src='https://placehold.co/100x100/0ea5e9/ffffff?text=RSUD+BK'">
         </div>
         <div>
-          <h1 class="text-sm font-bold text-slate-900 tracking-wide uppercase">RSUD Bandung Kiwari</h1>
+          <h1 class="text-sm font-bold text-slate-900 tracking-wide uppercase">DIKLAT RSUD Bandung Kiwari</h1>
           <p class="text-xs text-slate-500 font-medium">Form Evaluasi Peserta Didik</p>
         </div>
       </div>
@@ -447,21 +447,36 @@
 
           <!-- Dokumentasi Kegiatan / Upload Foto -->
           <div class="space-y-2">
-            <label class="block text-sm font-semibold text-slate-700">Dokumentasi Kegiatan / Upload Foto <span class="text-red-500">*</span></label>
-            <p class="text-xs text-slate-400 mb-2">Unggah file foto dokumentasi atau bukti pelayanan. Berkas akan otomatis disimpan dengan nama Anda dan Tanggal saat ini (Format: JPG, PNG, Max 5MB).</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
-              <!-- File Drag Drop Zone -->
-              <div class="border-2 border-dashed border-slate-200 hover:border-kiwari-500 rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer bg-slate-50 hover:bg-kiwari-50/20 transition-all relative" @click="$refs.fileInput.click()">
-               <input type="file" x-ref="fileInput" @change="handleFileUpload($event)" accept="image/*" capture="environment" class="hidden">
-                
-                <div class="w-12 h-12 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center text-kiwari-600 mb-3">
-                  <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
-                </div>
-                <p class="text-sm font-semibold text-slate-700 text-center">Klik atau Tarik Foto ke Sini</p>
-                <p class="text-[10px] text-slate-400 mt-1 text-center">JPG, PNG, JPEG up to 5MB</p>
-              </div>
+  <label class="block text-sm font-semibold text-slate-700">
+    Dokumentasi Kegiatan / Upload Foto <span class="text-red-500">*</span>
+  </label>
+  <p class="text-xs text-slate-400 mb-2">
+    Unggah file foto dokumentasi atau bukti pelayanan. Berkas akan otomatis disimpan dengan nama Anda dan Tanggal saat ini (Format: JPG, PNG, Max 5MB).
+  </p>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- File Drag Drop Zone -->
+    <div 
+      class="border-2 border-dashed border-slate-200 hover:border-kiwari-500 rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer bg-slate-50 hover:bg-kiwari-50/20 transition-all relative" 
+      @click="$refs.fileInput.click()"
+    >
+      <!-- capture="environment" telah dihapus di sini -->
+      <input 
+        type="file" 
+        x-ref="fileInput" 
+        @change="handleFileUpload($event)" 
+        accept="image/*" 
+        class="hidden"
+      >
+      
+      <div class="w-12 h-12 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center text-kiwari-600 mb-3">
+        <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
+      </div>
+      <p class="text-sm font-semibold text-slate-700 text-center">Klik atau Tarik Foto ke Sini</p>
+      <p class="text-[10px] text-slate-400 mt-1 text-center">JPG, PNG, JPEG up to 5MB</p>
+    </div>
+  </div>
+</div>
 
               <!-- File Preview Zone -->
               <div class="border border-slate-200 rounded-2xl p-4 flex flex-col items-center justify-center bg-slate-50/50 relative overflow-hidden">
